@@ -3,8 +3,18 @@
 // @version      1.4
 // @description  quick link selectors
 // @author       Arekusei
-// @include      *://pixelplanet.fun/#*
-// @include      *://fuckyouarkeros.fun/*
+// @match      *://pixelplanet.fun/*
+// @match      *://fuckyouarkeros.fun/*
+// @match      *://pixmap.fun/*
+// @match      *://pixuniverse.fun/*
+// @match      *://pixelya.fun/*
+// @match      *://pixworld.net/*
+// @match      *://globalpixel.xyz/*
+// @match      *://planetcanvas.online/*
+// @match      *://pxgame.xyz/*
+// @match      *://pixarea.fun/*
+// @match      *://pixland.fun/*
+// @match      *://canvaspixel.net/*
 // @updateURL    https://github.com/Arsenicus/Linker/raw/main/Linker.user.js
 // @downloadURL  https://github.com/Arsenicus/Linker/raw/main/Linker.user.js
 
