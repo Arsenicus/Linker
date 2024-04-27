@@ -3,8 +3,17 @@
 // @version      1.4
 // @description  quick link selectors
 // @author       Arekusei
-// @include      *://pixelplanet.fun/#*
-// @include      *://fuckyouarkeros.fun/*
+// @match        *://pixelplanet.fun/*
+// @match        *://fuckyouarkeros.fun/*
+// @match        *://pixmap.fun/*
+// @match        *://pixuniverse.fun/*
+// @match        *://pixelya.fun/*
+// @match        *://globalpixel.xyz/*
+// @match        *://planetcanvas.online/*
+// @match        *://pxgame.xyz/*
+// @match        *://pixarea.fun/*
+// @match        *://pixland.fun/*
+// @match        *://canvaspixel.net/*
 // @updateURL    https://github.com/Arsenicus/Linker/raw/main/Linker.user.js
 // @downloadURL  https://github.com/Arsenicus/Linker/raw/main/Linker.user.js
 
@@ -36,7 +45,7 @@ div.innerHTML = `
 
     </div>
     <div  style="background-color: rgba(0, 0, 0, 0.90); display: flex;
-    color: rgb(255, 128, 0); text-align: left; 
+    color: rgb(255, 128, 0); text-align: left;
     font-size: 70%; clear:both;"/>
     <input type="text" placeholder="Description" style=" max-width: 107px; background-color: black; border-color: #8b4000; color: rgb(255, 128, 0);" id="linkInput"></input>
     <input type="submit" value="✚" id="subLink" style=" width: 20pt; background-color: black; border-color: #8b4000; color: rgb(255, 128, 0);"></input>
@@ -49,13 +58,13 @@ addStyle(`
         color:rgb(255, 128, 0);
         margin-left: 5px;
         word-wrap: break-word;
-        font-size: 14px; 
+        font-size: 14px;
     }
     div#Linker .remove{
-        float: right; 
-        width: 18pt; 
-        background-color: black; 
-        border-color: #ff8000; 
+        float: right;
+        width: 18pt;
+        background-color: black;
+        border-color: #ff8000;
         color: rgb(255, 128, 0);
         word-wrap: break-word;
         margin-right: 2px;
@@ -157,9 +166,9 @@ function addLink() {
     span.classList.add("remove");
     span.textContent = "✖";
     //span.style.cssText = 'float: right; width: 15%; background-color: black; border-color: #8b4000; color: rgb(255, 128, 0);';
-    span.addEventListener("click", removeSkill);
     p.appendChild(span); // Add the span to the bullet
     linkList.appendChild(p); // Add the bullet to the list
+    span.addEventListener("click", removeSkill);
     addEventsDragAndDrop(p);
     newSkill.value = "";
     var x = document.getElementById("linkView");
@@ -167,25 +176,40 @@ function addLink() {
 
 }
 
-function removeSkill() {
+function removeSkill(e) {
     console.log("Clicked");
     // Just remove the closest <li> ancestor to the <span> that got clicked
     var g = document.getElementById('linkView');
     for (var i = 0, len = g.children.length; i < len; i++) {
 
         (function(index) {
-            g.children[i].onclick = function() {
+            g.children[i].children[1].onclick = function() {
                 //alert(index);
+              // console.log(g.children[i].className)
+              // if (g.children[i].className !== "remove") { return;}
+              //   try {
+              //     console.log(g.children[index].children[1]);
+              //   } catch (error) {
+              //     console.error(error);
+              //   }
+
+                // if (g.children[index].children[1].getAttribute("class") == "remove"){
+
                 storeLinks.splice(index, 1);
                 window.localStorage.setItem('Linker', JSON.stringify(storeLinks));
                 console.log(storeLinks);
+                console.log("spliced somehow")
+                  linkList.removeChild(this.closest("p"));
+                // }
 
             }
         })(i);
 
     }
     console.log(this);
-    linkList.removeChild(this.closest("p"));
+    console.log("END");
+
+
     //slist("linkView");
 }
 
@@ -235,10 +259,10 @@ function dragDrop(e) {
 
         //Transfer before setting event
         // this.innerHTML = e.dataTransfer.getData('text/html');
-        this.children[1].addEventListener("click", removeSkill);
+        // this.children[1].addEventListener("click", removeSkill);
         var first = getElementIndex(dragSrcEl),
             second = getElementIndex(this);
-        //swapArrayElements(storeLinks,first,second); 
+        //swapArrayElements(storeLinks,first,second);
         storeLinks.move(first, second);
         window.localStorage.setItem('Linker', JSON.stringify(storeLinks));
         // console.log(this.parentNode);
@@ -275,7 +299,7 @@ function addEventsDragAndDrop(el) {
 var listItens = document.querySelectorAll('#linkView p');
 // listItens.forEach.call(listItens, function(item) {
 //   addEventsDragAndDrop(item);
-// });    
+// });
 
 listItens.forEach(item => {
     addEventsDragAndDrop(item);
